@@ -1,0 +1,60 @@
+model: ConvTasNetFilteringModel
+dataset_type: pre_split
+dataset_relative_path: Datasets/pink_filt_8_12_250Hz.npz
+split_ds_into_chunks: true
+start_from_checkpoint: null
+norm_by_train_std: false
+train_dataset_specific_params:
+  first_observation_idx: 0
+  amount_of_observations: 4500
+val_dataset_specific_params:
+  first_observation_idx: 4500
+  amount_of_observations: 50
+test_dataset_specific_params:
+  first_observation_idx: 4900
+  amount_of_observations: 5
+model_params:
+  num_sources: 2
+  output_chunk_length: 25
+  input_chunk_length: 1000
+opt_params:
+  lr: 0.01
+sch_params:
+  mode: min
+  factor: 0.1
+  patience: 3
+train_sampler_params:
+  replacement: false
+  num_samples: 768000
+val_sampler_params: null
+system_params: {}
+dataloader_params:
+  batch_size: 1750
+  drop_last: false
+  num_workers: 0
+trainer_params:
+  max_epochs: 200
+  log_every_n_steps: 1
+checkpoint_params:
+  save_weights_only: false
+  save_top_k: -1
+  monitor: val_loss
+  filename: '{epoch}'
+  save_last: true
+  every_n_epochs: 1
+  mode: min
+early_stopping_params:
+  monitor: val_loss
+  patience: 10
+  mode: min
+hydra:
+  job:
+    chdir: true
+  run:
+    dir: results/outputs/${model}/${now:%Y-%m-%d}/${now:%H-%M-%S}
+device: gpu
+dataset_common_params:
+  input_size: 5024
+  output_size: 4000
+  gt_key: HFIR_GT
+alpha_2_country_code: RU

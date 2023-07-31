@@ -1,0 +1,58 @@
+model: TransformerModel
+dataset_relative_path: Datasets/state_space_white_10Hz_250Hz.npz
+start_from_checkpoint: null
+ckpt_type: null
+train_dataset_specific_params:
+  first_observation_idx: 0
+  amount_of_observations: 4500
+val_dataset_specific_params:
+  first_observation_idx: 4500
+  amount_of_observations: 50
+model_params:
+  input_chunk_length: 1000
+  output_chunk_length: 25
+  d_model: 32
+  nhead: 2
+  num_encoder_layers: 2
+  num_decoder_layers: 2
+  dim_feedforward: 256
+  dropout: 0.1
+  activation: relu
+  norm_type: null
+  custom_encoder: null
+  custom_decoder: null
+  random_state: 0
+fit_params:
+  max_samples_per_ts: 100
+opt_params:
+  lr: 0.01
+sch_params:
+  mode: min
+  factor: 0.1
+  patience: 3
+additional_params:
+  save_checkpoints: true
+  log_tensorboard: false
+  n_epochs: 200
+  show_warnings: true
+dataloader_params:
+  batch_size: 512
+  num_loader_workers: 0
+pl_trainer_kwargs:
+  accelerator: gpu
+  devices:
+  - 0
+early_stopping_params:
+  monitor: val_loss
+  patience: 7
+  mode: min
+hydra:
+  job:
+    chdir: true
+  run:
+    dir: results/outputs/${model}/${now:%Y-%m-%d}/${now:%H-%M-%S}
+dataset_common_params:
+  target_ts_size: 5000
+  gt_lag: 25
+  gt_key: True_GT
+alpha_2_country_code: RU

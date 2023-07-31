@@ -1,0 +1,83 @@
+model: ConvTasNetFilteringModel
+dataset_type: multiperson_real_data
+dataset_relative_path: Datasets/real_data_250Hz.npz
+split_ds_into_chunks: true
+start_from_checkpoint: null
+norm_by_train_std: true
+train_dataset_specific_params:
+  first_observation_idx: 0
+  amount_of_observations: 1847
+val_dataset_specific_params:
+  first_observation_idx: 1847
+  amount_of_observations: 50
+test_dataset_specific_params:
+  first_observation_idx: 1897
+  amount_of_observations: 3
+model_params:
+  num_sources: 2
+  output_chunk_length: 25
+  input_chunk_length: 1000
+opt_params:
+  lr: 0.01
+sch_params:
+  mode: min
+  factor: 0.1
+  patience: 3
+train_sampler_params:
+  replacement: false
+  num_samples: 768000
+val_sampler_params: null
+system_params: {}
+dataloader_params:
+  batch_size: 1750
+  drop_last: false
+  num_workers: 0
+trainer_params:
+  max_epochs: 200
+  log_every_n_steps: 1
+checkpoint_params:
+  save_weights_only: false
+  save_top_k: -1
+  monitor: val_loss
+  filename: '{epoch}'
+  save_last: true
+  every_n_epochs: 1
+  mode: min
+early_stopping_params:
+  monitor: val_loss
+  patience: 10
+  mode: min
+hydra:
+  job:
+    chdir: true
+  run:
+    dir: results/outputs/${model}/${now:%Y-%m-%d}/${now:%H-%M-%S}
+device: gpu
+dataset_common_params:
+  input_size: 5024
+  output_size: 4000
+  gap: 3250
+  ids_to_use:
+  - 2
+  - 4
+  - 5
+  - 6
+  - 8
+  - 12
+  - 14
+  - 15
+  - 17
+  - 20
+  - 24
+  - 26
+  - 27
+  - 28
+  - 34
+  - 39
+  - 44
+  - 45
+  - 47
+  - 48
+  shuffle_dataset: true
+  maximal_per_person_size: null
+alpha_2_country_code: RU

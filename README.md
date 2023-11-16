@@ -11,7 +11,7 @@ All configs for neural networks are provided in config_files directory. This dir
 
 ## Datasets
 
-Datasets used in the experiments are provided here https://doi.org/10.5281/zenodo.8135837
+Datasets used in the experiments are provided here https://doi.org/10.5281/zenodo.8207948
 
 ## Synthetic EEG forecasting
 

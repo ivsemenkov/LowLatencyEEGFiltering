@@ -263,7 +263,8 @@ If you use our data or code please cite our paper:
 
 https://dx.doi.org/10.1088/1741-2552/acf7f3
 
-`@article{Semenkov_2023,
+```
+@article{Semenkov_2023,
 doi = {10.1088/1741-2552/acf7f3},
 url = {https://dx.doi.org/10.1088/1741-2552/acf7f3},
 year = {2023},
@@ -275,5 +276,6 @@ pages = {056008},
 author = {Ilia Semenkov and Nikita Fedosov and Ilya Makarov and Alexei Ossadtchi},
 title = {Real-time low latency estimation of brain rhythms with deep neural networks},
 journal = {Journal of Neural Engineering}
-}`
+}
+```
 
